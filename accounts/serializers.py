@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from accounts.models import NormalUser
+from plants.serializers import PlantSerializer
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -19,6 +20,8 @@ class UserVerifyCodeSerializer(serializers.Serializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    saved_plants = PlantSerializer(many=True)
+
     class Meta:
         model = NormalUser
-        fields = ['id', 'email', 'name', 'phone_number', 'is_garden_owner', 'image']
+        exclude = ['password']
