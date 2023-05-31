@@ -1,8 +1,8 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny
-from plants.serializers import PlantSerializer
-from .models import Plant
-
+from plants.serializers import PlantSerializer, SavedPlantListSerializer
+from .models import Plant, SavedPlantList
+from rest_framework import viewsets
 
 class PlantFilter(ListAPIView):
     serializer_class = PlantSerializer
@@ -26,3 +26,16 @@ class PlantDetails(RetrieveAPIView):
     serializer_class = PlantSerializer
     queryset = Plant.objects.filter(is_valid=True)
     lookup_field = 'id'
+
+
+# class SavedProductListViewSet(viewsets.ModelViewSet):
+#     queryset = SavedPlantList.objects.all()
+#     serializer_class = SavedPlantListSerializer
+
+
+# class PlantListView(ListAPIView):
+#     serializer_class = PlantSerializer
+#
+#     def get_queryset(self):
+#         user_id = self.kwargs['user_id']
+#         return Plant.objects.filter(savedproductlist__user=user_id)
