@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import NormalUser
+# from accounts.models import NormalUser
 
 # Create your models here.
 class Plant(models.Model):
@@ -75,6 +75,6 @@ class PlantImage(models.Model):
     plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
 
 
-class SavedPlantList(models.Model):
-    user = models.ForeignKey(NormalUser, on_delete=models.CASCADE)
-    plants = models.ManyToManyField(Plant)
+# class SavedPlantList(models.Model):
+#     user = models.ForeignKey(NormalUser, on_delete=models.CASCADE)
+#     plants = models.ManyToManyField(Plant)
