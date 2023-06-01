@@ -5,6 +5,8 @@ from rest_framework.generics import ListAPIView, UpdateAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+import plants.serializers
 from plants.models import Plant
 from utils import send_otp_code
 from . import serializers
@@ -113,7 +115,7 @@ class UserLogoutView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
-class SavedPlantList(APIView):
+class AddBookmark(APIView):
     permission_classes = [IsAuthenticated]
 
     def put(self, request, id_plant):
@@ -123,3 +125,12 @@ class SavedPlantList(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         user.saved_plants.add(plant[0])
         return Response(status=status.HTTP_200_OK)
+
+
+class GetBookmarkList(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = plants.serializers.PlantSerializer
+    queryset = NormalUser.objects.all()
+
+    def get_queryset(self):
+        return self.request.user.saved_plants

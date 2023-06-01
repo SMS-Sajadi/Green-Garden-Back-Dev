@@ -11,5 +11,6 @@ urlpatterns = [
     path('logout/', views.UserLogoutView.as_view(), name='user_logout'),
     path('get-user/', views.GetUser.as_view(), name='get_user'),
     path('update-user/', views.UpdateUser.as_view(), name='update_user'),
-    path('bookmark-plant/<int:id_plant>', views.SavedPlantList.as_view(), name='saved_plant_list'),
+    path('bookmark-plant/<int:id_plant>', views.AddBookmark.as_view(), name='save_plant'),
+    path('bookmark-plant/', views.GetBookmarkList.as_view(), name='saved_plant_list'),
 ]
