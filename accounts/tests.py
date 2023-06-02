@@ -2,11 +2,8 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
-
 from plants.models import Plant
 from .models import TemporaryUser, NormalUser
-
-code = 0
 
 class AccountsTests(APITestCase):
 
