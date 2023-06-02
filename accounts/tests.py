@@ -16,7 +16,7 @@ class SavedPlantListTestCase(APITestCase):
                                           is_seasonal=False, fragrance=False, pet_compatible=True,
                                           allergy_compatible=True, edible=False, special_condition="ندارد",
                                           is_valid=True)
-        self.url = reverse('accounts:saved_plant_list', kwargs={'id_plant': self.plant.id})
+        self.url = reverse('accounts:save_plant', kwargs={'id_plant': self.plant.id})
 
     def test_save_plant(self):
         response = self.client.put(self.url)
