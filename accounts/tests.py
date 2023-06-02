@@ -24,10 +24,20 @@ class AccountsTests(APITestCase):
                                           allergy_compatible=True, edible=False, special_condition="ندارد",
                                           is_valid=True)
 
-    def test_user_signup(self):
+    def test_user_options(self):
 
         # --------------------- signup test
         url_signup = reverse('accounts:user_register')
         response_signup = self.client.post(url_signup, data=self.valid_user_data)
         self.assertEqual(response_signup.status_code, status.HTTP_200_OK)
         self.assertTrue(TemporaryUser.objects.filter(email=self.valid_user_data['email']).exists())
+
+        # --------------------- verify code test
+        otp_code = TemporaryUser.objects.filter(email=self.valid_user_data['email']).first().code
+        url_verify_code = reverse('accounts:verify_code')
+        code = {
+            'code': otp_code
+        }
+        response_verify_code = self.client.post(url_verify_code, data=code)
+        self.assertEqual(response_verify_code.status_code, status.HTTP_200_OK)
+        signup_user = NormalUser.objects.get(email='Mary@example.com')
