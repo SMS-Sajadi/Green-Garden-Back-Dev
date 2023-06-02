@@ -1,8 +1,9 @@
-from rest_framework.test import APITestCase
-from plants.serializers import PlantSerializer
-from .models import Plant
 from django.urls import reverse
 from rest_framework import status
+from rest_framework.test import APITestCase
+
+from plants.serializers import PlantSerializer
+from .models import Plant
 
 
 class PlantDetailsTestCase(APITestCase):
