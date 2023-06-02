@@ -5,7 +5,7 @@ from .models import Plant, PlantImage
 
 @admin.register(Plant)
 class PlantAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_valid',)
+    list_display = ('name', 'is_valid', 'id')
 
 
 @admin.register(PlantImage)
