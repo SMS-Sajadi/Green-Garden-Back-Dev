@@ -66,3 +66,13 @@ class AccountsTests(APITestCase):
         response_delete_save_plant = self.client.delete(url_remove_save_plant)
         self.assertEqual(response_delete_save_plant.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(login_user.saved_plants.filter(id=self.plant.id).exists())
+
+        # --------------------- change password test
+        data_change_password = {
+            'old_password': '1234',
+            'new_password': '4321'
+        }
+        url_change_password = reverse('accounts:change_password')
+        response_change_password = self.client.post(url_change_password, data=data_change_password)
+        self.assertEqual(response_change_password.status_code, status.HTTP_200_OK)
+        # self.assertEquals(login_user.password, '4321')
