@@ -1,14 +1,12 @@
-from rest_framework import status
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from plants.serializers import PlantSerializer
 from .models import Plant
 
 
-class PlantFilter(ListAPIView):
+class PlantFilterView(ListAPIView):
     serializer_class = PlantSerializer
     permission_classes = [AllowAny]
     # It can be safely remove if we only use get_queryset function
@@ -25,14 +23,17 @@ class PlantFilter(ListAPIView):
         return Plant.objects.filter(**filter)
 
 
-class PlantDetails(RetrieveAPIView):
+class PlantDetailsView(RetrieveAPIView):
     permission_classes = [AllowAny]
     serializer_class = PlantSerializer
     queryset = Plant.objects.filter(is_valid=True)
     lookup_field = 'id'
 
 
-class PlantList(ListAPIView):
+class PlantListView(ListAPIView):
     serializer_class = PlantSerializer
     permission_classes = [AllowAny]
     queryset = Plant.objects.filter(is_valid=True)
+
+
+
